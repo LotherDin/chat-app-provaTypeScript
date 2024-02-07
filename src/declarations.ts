@@ -1,22 +1,30 @@
 /** @format */
 
-export const mapNodes = {
-  root: 'root',
-  buttonSignIn: 'btn-signin',
-  buttonLogout: 'btn-logout',
-  inputEmail: 'input-email',
-  inputPassword: 'input-password',
-  inputMessage: 'input-message',
-  buttonSend: 'btn-send',
-  messageList: 'message-list',
-} as const;
-
-export type NodeID = (typeof mapNodes)[keyof typeof mapNodes];
-
-export type Message = {
-  author: string;
-  content: string;
-  ref: string;
-  date: Date;
+export interface TUser {
   id: string;
-};
+  username: string;
+  password: string;
+}
+
+export interface TRoom {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  private: boolean;
+  name: string;
+  messages: Array<TMessage>;
+  users: Array<{
+    idUser: TUser['id'];
+    permission: 'admin' | 'moderator' | 'user';
+  }>;
+}
+
+export interface TMessage {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  content: string;
+  idUser: TUser['id'];
+  idRoom: TRoom['id'];
+  ref: TMessage['id'];
+}

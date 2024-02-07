@@ -1,10 +1,10 @@
 /** @format */
 
-import { utilityGetEmailLogged } from './utilities/user/getEmailLogged';
-import { renderViewChat } from './views/view-chat';
-import { renderViewLogin } from './views/view-login';
+import { AppDiscord } from './app';
 
-window.onload = () => {
-  const email = utilityGetEmailLogged();
-  !!email ? renderViewChat() : renderViewLogin();
-};
+window.onload = () => {};
+
+export const app = new AppDiscord();
+
+// @ts-ignore
+window.app = app;
